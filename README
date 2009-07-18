@@ -1,0 +1,51 @@
+Repository for "instrumented" memcached AMI.
+
+--------------
+
+Story flow for getting started with Mr Roboto.
+
+And, there's an auth idea tweak below...
+
+- The end user logs into their web Amazon Management Console.
+
+- He chooses Launch EC2 Instances and searches for "memcached".
+
+- He picks northscale/instrumented-memcached-1.4.0, fills in the usual
+info, and hits Launch.
+
+- He waits 10 minutes, and does google searches on that AMI id so he
+knows his next steps...
+
+- He can telnet to [new-instance-ip-address]:11211 to test some
+memcached gets and sets.
+
+- And/or, he can open a web browser to http://[new-instance-ip-address]
+
+- On that web page is "Value Ad" stuff -- enticing instructions,
+screenshots and NorthScale branding
+
+- Also, there's a login form
+
+- He enters his AMI instance id (which he copies and pastes from his
+Amazon EC2 Console screen)
+ into the form, and now he can see that single node's dashboard
+
+= I'm proposing we use the AMI instance id (eg, i-4d003c24) be used as
+a simple,
+  weak-but-good-enough secret for getting to the nice HTML pages.
+  Are IP-addresses mapped in a public way to AMI instance id's?
+
+= btw: http://stackoverflow.com/questions/625644/find-out-the-instance-id-from-within-an-ec2-machine
+
+- The dashboard's UI is dynamically updated as memcached traffic happens.
+
+- Behind the scenes, slosh and dtrace are doing their thing.
+
+= The slosh/dtrace stuff should ideally be dynamically downloaded from S3/git,
+ to pick up new features automatically?
+
+= And, if the user hits his browser's Reload button, new dashboard
+features may appear, too,
+ since much of the app (JavaScript & CSS) comes from the latest
+NorthScale servers.
+
