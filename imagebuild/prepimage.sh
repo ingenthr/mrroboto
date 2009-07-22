@@ -58,6 +58,17 @@ done
 # check out mrroboto
 git clone git@github.com:northscale/mrroboto.git
 
+# get the python stuff
+pkg install SUNWPython25
+#get easy install
+wget http://pypi.python.org/packages/2.5/s/setuptools/setuptools-0.6c9-py2.5.egg#md5=fe67c3e5a17b12c0e7c541b7ea43a8e6
+sh setuptools-0.6c9-py2.5.egg
+easy_install Twisted
+easy_install simplejson
+
+#give the user DTrace privileges
+usermod -K defaultpriv=basic,dtrace_user,dtrace_proc user1
+
 # copy the scripts and content into the right place
 
 # do the rebundling itself
