@@ -10,30 +10,31 @@ And, there's an auth idea tweak below...
 
 - He chooses Launch EC2 Instances and searches for "memcached".
 
-- He picks northscale/instrumented-memcached-1.4.0, fills in the usual
-info, and hits Launch.
+- He picks northscale/community-memcached-1.4.0+instrumentation, 
+  fills in the usual info, and hits Launch.
 
 - He waits 10 minutes, and does google searches on that AMI id so he
-knows his next steps...
+  knows his next steps...
 
 - He can telnet to [new-instance-ip-address]:11211 to test some
-memcached gets and sets.
+  memcached gets and sets.
 
 - And/or, he can open a web browser to http://[new-instance-ip-address]
 
 - On that web page is "Value Ad" stuff -- enticing instructions,
-screenshots and NorthScale branding
+  screenshots and NorthScale branding
 
-- Also, there's a login form
+- Also, there's a link to login, and one to instructions for now to 
+  log in
 
-- He enters his AMI instance id (which he copies and pastes from his
-Amazon EC2 Console screen)
- into the form, and now he can see that single node's dashboard
+- He clicks on the login, enters memcached as the login name and his 
+  AMI instance id as a password (which he copies and pastes from his
+  Amazon EC2 Console screen) into the form, and now he can see that 
+  single node's dashboard
 
 = I'm proposing we use the AMI instance id (eg, i-4d003c24) be used as
-a simple,
-  weak-but-good-enough secret for getting to the nice HTML pages.
-  Are IP-addresses mapped in a public way to AMI instance id's?
+  a simple, weak-but-good-enough secret for getting to the nice HTML pages.
+  Are IP addresses mapped in a public way to AMI instance id's?
 
 = btw: http://stackoverflow.com/questions/625644/find-out-the-instance-id-from-within-an-ec2-machine
 
