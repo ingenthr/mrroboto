@@ -1,5 +1,10 @@
 #!/bin/ksh
 
+if [[ $1 == "" ]] then; 
+  echo "usage: loadInstance.sh <instance hostname>"
+  exit 1
+fi
+
 echo $PWD
 . $PWD/deps.env
 
@@ -9,3 +14,5 @@ scp -i $YSSHCERT \
 
 scp -i $YSSHCERT $YSSHGITKEY \
   root@$1:/tmp
+
+scp -i $YSSHCERT loadInstance-remote.sh root@$1:/tmp
