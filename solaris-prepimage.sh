@@ -9,10 +9,10 @@ export BUCKET=northscale
 export PATH=$PATH:$EC2_HOME/bin 
 export RUBYLIB=$EC2_HOME/lib 
 export EC2_URL=https://ec2.amazonaws.com 
-export EC2_PRIVATE_KEY=/mnt/keys/blah
-export EC2_CERT=/mnt/keys/blah
-#export EC2_KEYID=<KEY ID> 
-#export EC2_KEY=<KEY> 
+export EC2_PRIVATE_KEY=/mnt/keys/pk-WBDFRTOLJOOKKAESM24HXVVCW556MAYH.pem
+export EC2_CERT=/mnt/keys/cert-WBDFRTOLJOOKKAESM24HXVVCW556MAYH.pem
+#export EC2_KEYID=blah
+#export EC2_KEY=blah
 export DIRECTORY=/mnt 
 export IMAGE=mrroboto.img
 
@@ -27,7 +27,7 @@ pkg refresh
 pkg install pkg:/sunstudioexpress@0.2009.3.1,5.11-0.101
 pkg install SUNWlighttpd14 SUNWlibevent
 
-# get the memcached upstream source for now, replace with pkg later
+# get tee memcached upstream source for now, replace with pkg later
 cd /tmp
 wget http://memcached.googlecode.com/files/memcached-1.4.0.tar.gz
 tar -zxf memcached-1.4.0.tar.gz
@@ -48,17 +48,20 @@ fi
 
 
 # it's a hack, but get a working git from a 2009.06 box
-scpuser=ingenthr
-scphost=24.152.131.52
-for i in $(pkg contents -r SUNWgit); 
-do 
-  scp $scpuser@$scphost:/$i /$i; 
-done
+# tar -czvf /var/tmp/gitfor2008.11.tar.gz `pkg contents -t file -o path SUNWgit | grep -v PATH`
+cd /
+wget http://blogs.ingenthron.org/gitfor2008.11.tar.gz
+tar -zxf gitfor2008.11.tar.gz
+rm gitfor2008.11.tar.gz
 
-# check out mrroboto
+# check out mrroboto, this presumes ssh access
+mkdir -p /tmp/src
+cd /tmp/src
 git clone git@github.com:northscale/mrroboto.git
 
 # get the python stuff
+PATH=/opt/SunStudioExpress/bin:$PATH
+cd /tmp
 pkg install SUNWPython25
 #get easy install
 wget http://pypi.python.org/packages/2.5/s/setuptools/setuptools-0.6c9-py2.5.egg#md5=fe67c3e5a17b12c0e7c541b7ea43a8e6
@@ -67,9 +70,13 @@ easy_install Twisted
 easy_install simplejson
 
 #give the user DTrace privileges
-usermod -K defaultpriv=basic,dtrace_user,dtrace_proc user1
+usermod -K defaultpriv=basic,dtrace_user,dtrace_proc webservd
 
 # copy the scripts and content into the right place
+cd /tmp
+DOCROOT=/var/lighttpd/1.4/docroot
+
+
 
 # do the rebundling itself
 rm -r /root/.ssh
