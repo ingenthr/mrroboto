@@ -1,0 +1,3 @@
+The intent here is that you can set deps.env, run the load script
+then ssh into the instance and run the prepimage.sh script to start the 
+rebundling.
