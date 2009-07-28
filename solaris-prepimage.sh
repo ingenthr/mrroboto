@@ -77,7 +77,7 @@ cd /tmp/src/mrroboto/imagebuild
 cp -r dscripts /usr/local/tdf
 
 # set up automatic startup and verify services start
-cp imagebuild/memcached-svc /usr/local/bin
+cp memcached-svc /usr/local/bin
 
 # cap ZFS memory usage
 cp /etc/system /etc/system.bak
