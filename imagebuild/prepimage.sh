@@ -1,4 +1,4 @@
-#!/bin/ksh
+#/bin/ksh
 
 echo This is just notes at this point
 exit -1
@@ -17,18 +17,16 @@ export DIRECTORY=/mnt
 export IMAGE=mrroboto.img
 
 
-if [[ ! -f $EC2_PRIVATE_KEY || ! -f $EC2_CERT || ! -f pass ]]; then
+if [[ ! -f $EC2_PRIVATE_KEY || ! -f $EC2_CERT ]]; then
   echo keys required for rebundling and password required to get git
   exit -1
 fi
 
-pkg refresh
 # stick to 101 due to a conflict with the latest, fix when fixed in the repo
-pkg install pkg:/sunstudioexpress@0.2009.3.1,5.11-0.101
-pkg install SUNWlighttpd14 SUNWlibevent
+pkg install sunstudioexpress SUNWlighttpd14 SUNWlibevent
 
-# get tee memcached upstream source for now, replace with pkg later
-cd /tmp
+# get the memcached upstream source for now, replace with pkg later
+cd /tmp/src
 wget http://memcached.googlecode.com/files/memcached-1.4.0.tar.gz
 tar -zxf memcached-1.4.0.tar.gz
 cd memcached-1.4.0
@@ -48,16 +46,12 @@ fi
 
 
 # it's a hack, but get a working git from a 2009.06 box
-# tar -czvf /var/tmp/gitfor2008.11.tar.gz `pkg contents -t file -o path SUNWgit | grep -v PATH`
-cd /
-wget http://blogs.ingenthron.org/gitfor2008.11.tar.gz
-tar -zxf gitfor2008.11.tar.gz
-rm gitfor2008.11.tar.gz
-
-# check out mrroboto, this presumes ssh access
-mkdir -p /tmp/src
-cd /tmp/src
-git clone git@github.com:northscale/mrroboto.git
+#tar -czvf /var/tmp/gitfor2008.11.tar.gz `pkg contents -t file \
+# -o path SUNWgit | grep -v PATH`
+#cd /
+#wget http://blogs.ingenthron.org/gitfor2008.11.tar.gz
+#tar -zxf gitfor2008.11.tar.gz
+#rm gitfor2008.11.tar.gz
 
 # get the python stuff
 PATH=/opt/SunStudioExpress/bin:$PATH
@@ -73,10 +67,30 @@ easy_install simplejson
 usermod -K defaultpriv=basic,dtrace_user,dtrace_proc webservd
 
 # copy the scripts and content into the right place
-cd /tmp
-DOCROOT=/var/lighttpd/1.4/docroot
+cd /tmp/src/mrroboto
+DOCROOT=/var/lighttpd/1.4
+TDFROOT=/var/tdf
+mkdir -p $TDFROOT
+cp -r tdf /usr/local
+rm -rf /usr/local/tdf/.git
+cd /tmp/src/mrroboto/imagebuild
+cp -r dscripts /usr/local/tdf
 
+# set up automatic startup and verify services start
+cp imagebuild/memcached-svc /usr/local/bin
 
+# cap ZFS memory usage
+cp /etc/system /etc/system.bak
+cat << STOP >> /etc/system
+*
+* lower the memory consumed by ZFS, since we won't be doing much FS stuff
+* here
+* 
+* http://www.solarisinternals.com/wiki/index.php/ZFS_Evil_Tuning_Guide#Limiting_the_ARC_Cache
+* 
+set zfs:zfs_arc_max = 1073741824
+
+STOP
 
 # do the rebundling itself
 rm -r /root/.ssh
@@ -93,3 +107,4 @@ bundle-image -c $EC2_CERT -k $EC2_PRIVATE_KEY   \
    --user <userid> --arch i386 \ 
    -i $DIRECTORY/$IMAGE -d $DIRECTORY/parts 
 
+echo !!!!verify /etc/system !!!!
