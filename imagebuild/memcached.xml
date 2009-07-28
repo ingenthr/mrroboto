@@ -35,7 +35,7 @@
 
 <service_bundle type='manifest' name='memcached' >
 <service name='application/database/memcached' type='service' version='1' >
-<instance name='northscale14' enable='true'/>
+<instance name='northscale14' enabled='true'>
 
 
    <dependency
@@ -63,7 +63,7 @@
    <exec_method
       type='method'
       name='stop'
-      exec='/lib/svc/method/memcached stop %{restarter/contract}'
+      exec='/usr/local/bin/memcached-svc stop %{restarter/contract}'
       timeout_seconds='60' />
 
     <property_group name='memcached' type='application'>
@@ -71,6 +71,7 @@
        <propval name='value_authorization' type='astring' value='solaris.smf.value.memcached' />
        <propval name='action_authorization' type='astring' value='solaris.smf.manage.memcached' />
     </property_group>
+</instance>
 
     <stability value='Evolving' />
 
