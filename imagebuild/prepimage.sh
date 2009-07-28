@@ -66,7 +66,7 @@ sh setuptools-0.6c9-py2.5.egg
 easy_install Twisted
 easy_install simplejson
 
-#give the user DTrace privileges
+# give the user DTrace privileges
 usermod -K defaultpriv=basic,dtrace_user,dtrace_proc webservd
 
 # copy the scripts and content into the right place
@@ -78,6 +78,10 @@ cp -r tdf /usr/local
 rm -rf /usr/local/tdf/.git
 cd /tmp/src/mrroboto/imagebuild
 cp -r dscripts /usr/local/tdf
+cd /tmp/src/mrroboto
+cp tdf/tdf-svc /usr/local/tdf
+cp /usr/local/tdf/tdf.mrroboto /usr/local/tdf/tdf.tac
+svccfg import tdf/tdf-manifest.xml
 
 # set up automatic startup and verify services start
 cp memcached-svc /usr/local/bin
