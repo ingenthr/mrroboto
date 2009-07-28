@@ -39,7 +39,9 @@ val=`svcprop -p "$1" memcached`
 
 MCBIN="/usr/local/bin"
 MCOPTIONS="`getproparg memcached/options`"
-
+MEMBASE=`prtconf | grep Mem | cut -f 3 -d " "`
+MEMUSE=`expr $MEMBASE - 1024`
+MCOPTIONS="$MCOPTIONS -m $MEMUSE"
 
 case "$1" in
 'start')
