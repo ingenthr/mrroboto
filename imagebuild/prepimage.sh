@@ -1,4 +1,4 @@
-#/bin/ksh
+#!/bin/ksh
 
 echo This is just notes at this point
 exit -1
@@ -30,12 +30,15 @@ cd /tmp/src
 wget http://memcached.googlecode.com/files/memcached-1.4.0.tar.gz
 tar -zxf memcached-1.4.0.tar.gz
 cd memcached-1.4.0
+configopts="--enable-dtrace"
 PATH=$PATH:/opt/SunStudioExpress/bin
 CC=/opt/SunStudioExpress/bin/cc
 CXX=/opt/SunStudioExpress/bin/CC
 CFLAGS="-fast -mt"
+if [[ `isalist | cut -f 1 -d " "` == "amd64" ]]; then
+  configopts="$configopts --enable-64bit"
+fi
 LIBS="-lumem"
-configopts="--enable-dtrace"
 if [[ ! -f Makefile ]]; then
 ./configure $configopts
 fi
