@@ -80,6 +80,7 @@ svccfg import tdf/tdf-manifest.xml
 
 # set up automatic startup and verify services start
 cp imagebuild/memcached-svc /usr/local/bin
+svccfg import imagebuild/memcached.xml
 
 # cap ZFS memory usage
 # this may not work on EC2 :(
