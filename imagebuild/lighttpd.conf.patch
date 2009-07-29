@@ -1,0 +1,57 @@
+--- lighttpd.conf.orig	2009-07-28 22:05:15.815645034 +0000
++++ lighttpd.conf	2009-07-29 04:44:22.529818657 +0000
+@@ -18,11 +18,11 @@
+                                 "mod_access",
+ #                               "mod_cml",
+ #                               "mod_trigger_b4_dl",
+-#                               "mod_auth",
++                                "mod_auth",
+ #                               "mod_status",
+ #                               "mod_setenv",
+ #                               "mod_fastcgi",
+-#                               "mod_proxy",
++                                "mod_proxy",
+ #                               "mod_simple_vhost",
+ #                               "mod_evhost",
+ #                               "mod_userdir",
+@@ -50,6 +50,33 @@
+ server.event-handler = "solaris-devpoll"
+ server.network-backend = "writev"
+ 
++proxy.server = ( "" =>
++                       ( ( 
++                           "host" => "127.0.0.1",
++                           "port" => 8080
++                         ) )
++                     )
++
++## type of backend 
++# plain, htpasswd, ldap or htdigest
++auth.backend               = "htdigest" 
++#auth.debug                 = 2
++
++# filename of the password storage for plain
++auth.backend.htdigest.userfile = "/var/lighttpd/1.4/lighttpd-htdigest.user" 
++
++
++$HTTP["url"] =~ "^/vvv" {
++  auth.require = ( "" =>
++                   (
++                     "method"  => "digest",
++                     "realm"   => "memcached AMI tools",
++                     "require" => "user=memcached" 
++                   )
++                 )
++}
++
++
+ 
+ # mimetype mapping
+ mimetype.assign             = (
+@@ -333,4 +360,4 @@
+ server.max-worker = 4
+ 
+ # Set the directory used for file uploads to /tmp
+-server.upload-dirs = ( "/tmp" )
++server.upload-dirs = ( "/var/tmp" )
+

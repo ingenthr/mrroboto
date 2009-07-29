@@ -99,6 +99,14 @@ set zfs:zfs_arc_max = 1073741824
 
 STOP
 
+# set up lighttpd
+/tmp/src/mrroboto/gen-htdigest.sh > /var/lighttpd/1.4/lighttpd-htdigest.user
+chmod 600 /var/lighttpd/1.4/lighttpd-htdigest.user
+chown webservd:webservd /var/lighttpd/1.4/lighttpd-htdigest.user
+patch /etc/lighttpd/1.4/lightpd.conf /tmp/src/mrroboto/imagebuild/lighttpd.conf.patch
+svcadm enable http:lighttpd14
+
+
 # do the rebundling itself
 rm -r /root/.ssh
 rm -f /var/adm/messages.[01234]
@@ -107,11 +115,20 @@ rm -f /var/adm/messages.[01234]
 > /var/adm/wtmpx
 rm /root/.bash_history
 
-cd $DIRECTORY
-bundle-image -c $EC2_CERT -k $EC2_PRIVATE_KEY   \ 
-   --kernel aki-6552b60c --ramdisk ari-6452b60d \ 
-   --block-device-mapping "root=rpool/52@0,ami=0,ephemeral0=1" \ 
-   --user <userid> --arch i386 \ 
-   -i $DIRECTORY/$IMAGE -d $DIRECTORY/parts 
+if [[ `isalist | cut -f 1 -d " "` == "amd64" ]]; then
+  ec2-bundle-image -c $EC2_CERT -k $EC2_PRIVATE_KEY   \
+    --kernel aki-fb3ddc92 --ramdisk ari-fd3ddc94 \
+    --block-device-mapping "root=rpool/56@0,ami=0,ephemeral0=1,ephemeral1=2,ephemeral2=3,ephemeral3=4" \
+    --user <user-id> --arch x86_64 \
+    -i $DIRECTORY/$IMAGE -d $DIRECTORY/parts 
+else
+  cd $DIRECTORY
+  ec2-bundle-image -c $EC2_CERT -k $EC2_PRIVATE_KEY   \
+    --kernel aki-1783627e --ramdisk ari-858362ec \
+    --block-device-mapping "root=rpool/56@0,ami=0,ephemeral0=1" \
+    --user <user-id> --arch i386 \
+    -i $DIRECTORY/$IMAGE -d $DIRECTORY/parts
+fi
+
 
 echo !!!!verify /etc/system !!!!
