@@ -96,7 +96,7 @@ svccfg import imagebuild/memcached.xml
 # set up lighttpd
 cd /tmp/src/mrroboto
 cp imagebuild/gen-htdigest.sh /usr/local/tdf
-svccfg import imagebuild/ec2/lighttpdauth.xml
+svccfg import imagebuild/ec2lighttpdauth.xml
 /usr/local/tdf/gen-htdigest.sh
 patch /etc/lighttpd/1.4/lighttpd.conf /tmp/src/mrroboto/imagebuild/lighttpd.conf.patch
 
