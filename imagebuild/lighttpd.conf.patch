@@ -34,7 +34,7 @@
 +auth.backend.htdigest.userfile = "/var/lighttpd/1.4/lighttpd-htdigest.user" 
 +
 +
-+$HTTP["url"] =~ "^/vvv" {
++$HTTP["url"] =~ "^/keyflow" {
 +  auth.require = ( "" =>
 +                   (
 +                     "method"  => "digest",

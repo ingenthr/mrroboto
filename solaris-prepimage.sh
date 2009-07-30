@@ -99,7 +99,21 @@ cp imagebuild/gen-htdigest.sh /usr/local/tdf
 svccfg import imagebuild/ec2/lighttpdauth.xml
 /usr/local/tdf/gen-htdigest.sh
 patch /etc/lighttpd/1.4/lighttpd.conf /tmp/src/mrroboto/imagebuild/lighttpd.conf.patch
+
+svccfg -s svc:/network/http:lighttpd14 << STOP
+addpg ec2lighttpdauth dependency
+setprop ec2lighttpdauth/grouping = astring: "require_all"
+setprop ec2lighttpdauth/restart_on = astring: "none"
+setprop ec2lighttpdauth/type = astring: "service"
+setprop ec2lighttpdauth/entities = fmri: "svc:/application/ec2lighttpdauth:default"
+STOP
+
 svcadm enable http:lighttpd14
+
+if [[ 0 -ne `svcs -x | wc -l` ]]; then
+  echo Services failed to start...
+  exit 1
+fi
 
 
 # do the rebundling itself

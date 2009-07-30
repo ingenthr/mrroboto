@@ -47,13 +47,19 @@
 
 		<exec_method type="method" name="stop" exec=":true" timeout_seconds="60"/>
 
+                <property_group name='startd' type='framework'>
+                  <propval name='duration' type='astring' value='transient' />
+                </property_group>
+
 		<property_group name="ec2lighttpdauth" type="application">
 			<propval name="duration" type="astring" value="transient"/>
 		</property_group>
 
 		<property_group name="general" type="framework">
-			<propval name="action_authorization" type="astring" value="solaris.smf.manage.http/lighttpd14"/>
-			<propval name="value_authorization" type="astring" value="solaris.smf.manage.http/lighttpd14"/>
+                  <propval name="action_authorization" type="astring"
+                   value="solaris.smf.manage.http/lighttpd14"/>
+                  <propval name="value_authorization" type="astring" 
+                   value="solaris.smf.manage.http/lighttpd14"/>
 		</property_group>
 
 	</instance>
@@ -63,7 +69,7 @@
 	<template>
 		<common_name>
 			<loctext xml:lang="C">
-				EC2 instance ID based configuration
+				Automatic EC2 instance ID based auth for lighttpd
 			</loctext>
 		</common_name>
 	</template>
