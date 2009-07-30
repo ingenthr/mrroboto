@@ -109,6 +109,7 @@ setprop ec2lighttpdauth/entities = fmri: "svc:/application/ec2lighttpdauth:defau
 STOP
 
 svcadm enable http:lighttpd14
+sleep 3
 
 if [[ 0 -ne `svcs -x | wc -l` ]]; then
   echo Services failed to start...
