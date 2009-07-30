@@ -14,12 +14,15 @@ export EC2_KEYID=AKIAJ3BZHH4WP3ZD3RBQ
 export EC2_KEY=vFkeaVabtCV2R9j/U+EF7QJRNAfeBS57cFZQ7zgJ
 export EC2_ACCT_NUM=7860-1448-3886
 export DIRECTORY=/mnt 
-if [[ `isalist | cut -f 1 -d " "` == "amd64" ]]; then
-  export IMAGE=community-memcached-1.4.0+instrumentation-x86_64
-else
-  export IMAGE=community-memcached-1.4.0+instrumentation-i386
-fi
 export BUCKET=northscale
+export DIRECTORY=/mnt
+export IMGBASE=instrumented-community-memcached-1.4.0
+if [[ `isalist | cut -f 1 -d " "` == "amd64" ]]; then
+  export IMAGE=$IMGBASE-x86_64
+else
+  export IMAGE=$IMGBASE-i386
+fi
+
 
 
 if [[ ! -f $EC2_PRIVATE_KEY || ! -f $EC2_CERT ]]; then

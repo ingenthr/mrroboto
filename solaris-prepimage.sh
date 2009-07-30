@@ -14,10 +14,12 @@ export EC2_CERT=/mnt/keys/cert-WBDFRTOLJOOKKAESM24HXVVCW556MAYH.pem
 #export EC2_KEY=blah
 export EC2_ACCT_NUM=7860-1448-3886
 export DIRECTORY=/mnt 
+export DIRECTORY=/mnt
+export IMGBASE=instrumented-community-memcached-1.4.0
 if [[ `isalist | cut -f 1 -d " "` == "amd64" ]]; then
-  export IMAGE=community-memcached-1.4.0+instrumentation-x86_64
+  export IMAGE=$IMGBASE-x86_64
 else
-  export IMAGE=community-memcached-1.4.0+instrumentation-i386
+  export IMAGE=$IMGBASE-i386
 fi
 
 if [[ ! -f $EC2_PRIVATE_KEY || ! -f $EC2_CERT ]]; then
