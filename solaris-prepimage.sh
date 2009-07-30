@@ -66,9 +66,6 @@ usermod -K defaultpriv=basic,dtrace_user,dtrace_proc webservd
 
 # copy the scripts and content into the right place
 cd /tmp/src/mrroboto
-DOCROOT=/var/lighttpd/1.4
-TDFROOT=/var/tdf
-mkdir -p $TDFROOT
 cp -r tdf /usr/local
 rm -rf /usr/local/tdf/.git
 cd /tmp/src/mrroboto
@@ -97,9 +94,10 @@ svccfg import imagebuild/memcached.xml
 #STOP
 
 # set up lighttpd
-/tmp/src/mrroboto/imagebuild/gen-htdigest.sh > /var/lighttpd/1.4/lighttpd-htdigest.user
-chmod 600 /var/lighttpd/1.4/lighttpd-htdigest.user
-chown webservd:webservd /var/lighttpd/1.4/lighttpd-htdigest.user
+cd /tmp/src/mrroboto
+cp imagebuild/gen-htdigest.sh /usr/local/tdf
+svccfg import imagebuild/ec2/lighttpdauth.xml
+/usr/local/tdf/gen-htdigest.sh
 patch /etc/lighttpd/1.4/lighttpd.conf /tmp/src/mrroboto/imagebuild/lighttpd.conf.patch
 svcadm enable http:lighttpd14
 
