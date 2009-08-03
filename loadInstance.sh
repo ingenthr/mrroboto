@@ -16,3 +16,5 @@ scp -i $YSSHCERT $YSSHGITKEY \
   root@$1:/tmp
 
 scp -i $YSSHCERT loadInstance-remote.sh root@$1:/tmp
+
+scp -i $YSSHCERT solaris-image.env root@$1:/tmp

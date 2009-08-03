@@ -1,0 +1,25 @@
+#
+# This is a sample environmental file showing what needs to be set to 
+# do the rebundling
+#
+JAVA_HOME=/usr/jdk/latest
+EC2_HOME=/opt/ec2
+BUCKET=northscale
+PATH=$PATH:$EC2_HOME/bin 
+RUBYLIB=$EC2_HOME/lib 
+EC2_URL=https://ec2.amazonaws.com 
+EC2_PRIVATE_KEY=/mnt/keys/pk-WBDFRTOLJOOKKAESM24HXVVCW556MAYH.pem
+EC2_CERT=/mnt/keys/cert-WBDFRTOLJOOKKAESM24HXVVCW556MAYH.pem
+#EC2_KEYID=blah
+#EC2_KEY=blah
+#EC2_ACCT_NUM=1234-5678-9012
+DIRECTORY=/mnt 
+BUCKET=northscale
+DIRECTORY=/mnt
+IMGBASE=community-memcached-1.4.0-with-tools
+if [[ `isalist | cut -f 1 -d " "` == "amd64" ]]; then
+  EC2_ARCH=amd64
+else
+  EC2_ARCH=i386
+fi
+IMAGE=$IMGBASE-$EC2_ARCH
