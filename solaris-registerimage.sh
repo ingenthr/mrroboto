@@ -2,7 +2,9 @@
 
 set -xe
 
-. solaris-image.env
+# source needed envrionmentals
+SCRIPTDIR=$(cd $(dirname "$0"); pwd)
+. $SCRIPTDIR/solaris-image.env
 
 if [[ ! -f $EC2_PRIVATE_KEY || ! -f $EC2_CERT ]]; then
   echo EC2 keys required for rebundling
