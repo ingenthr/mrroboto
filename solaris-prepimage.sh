@@ -102,7 +102,7 @@ STOP
 svcadm enable http:lighttpd14
 sleep 3
 
-if (( 0 -ne `svcs -x | wc -l` )); then
+if [[ 0 -ne `svcs -x | wc -l` ]]; then
   echo Services failed to start...
   exit 1
 fi
