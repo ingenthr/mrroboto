@@ -89,6 +89,7 @@ cd /tmp/src/mrroboto
 cp imagebuild/gen-htdigest.sh /usr/local/tdf
 svccfg import imagebuild/ec2lighttpdauth.xml
 /usr/local/tdf/gen-htdigest.sh
+cp /etc/lighttpd/1.4/lighttpd.conf /etc/lighttpd/1.4/lighttpd.conf.orig
 patch /etc/lighttpd/1.4/lighttpd.conf /tmp/src/mrroboto/imagebuild/lighttpd.conf.patch
 
 svccfg -s svc:/network/http:lighttpd14 << STOP
