@@ -1,5 +1,5 @@
---- lighttpd.conf.orig	2009-07-28 22:05:15.815645034 +0000
-+++ lighttpd.conf	2009-07-29 04:44:22.529818657 +0000
+--- lighttpd.conf.orig  2009-08-05 00:19:44.347741389 +0000
++++ lighttpd.conf       2009-08-05 00:22:57.305170294 +0000
 @@ -18,11 +18,11 @@
                                  "mod_access",
  #                               "mod_cml",
@@ -14,7 +14,7 @@
  #                               "mod_simple_vhost",
  #                               "mod_evhost",
  #                               "mod_userdir",
-@@ -50,6 +50,33 @@
+@@ -50,6 +50,24 @@
  server.event-handler = "solaris-devpoll"
  server.network-backend = "writev"
  
@@ -34,6 +34,15 @@
 +auth.backend.htdigest.userfile = "/var/lighttpd/1.4/lighttpd-htdigest.user" 
 +
 +
++
++
+ 
+ # mimetype mapping
+ mimetype.assign             = (
+@@ -267,6 +285,15 @@
+ #$HTTP["host"] =~ "^www\.(.*)" {
+ #  url.redirect            = ( "^/(.*)" => "http://%1/$1" )
+ #}
 +$HTTP["url"] =~ "^/keyflow" {
 +  auth.require = ( "" =>
 +                   (
@@ -43,15 +52,12 @@
 +                   )
 +                 )
 +}
-+
-+
  
- # mimetype mapping
- mimetype.assign             = (
+ #
+ # define a pattern for the host url finding
 @@ -333,4 +360,4 @@
  server.max-worker = 4
  
  # Set the directory used for file uploads to /tmp
 -server.upload-dirs = ( "/tmp" )
 +server.upload-dirs = ( "/var/tmp" )
-
