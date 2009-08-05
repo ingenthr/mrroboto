@@ -1,5 +1,5 @@
---- lighttpd.conf.orig  2009-08-05 00:19:44.347741389 +0000
-+++ lighttpd.conf       2009-08-05 00:22:57.305170294 +0000
+--- lighttpd.conf.orig	2009-08-05 16:18:59.979348869 +0000
++++ lighttpd.conf	2009-08-05 16:20:31.472346558 +0000
 @@ -18,11 +18,11 @@
                                  "mod_access",
  #                               "mod_cml",
@@ -39,7 +39,15 @@
  
  # mimetype mapping
  mimetype.assign             = (
-@@ -267,6 +285,15 @@
+@@ -173,6 +191,7 @@
+ ## -> ..../status-404.html for 'File not found'
+ #server.errorfile-prefix    = "/usr/share/lighttpd/errors/status-"
+ #server.errorfile-prefix    = "/srv/www/errors/status-"
++server.errorfile-prefix    = "/usr/local/tdf/mrroboto/status-"
+ 
+ ## virtual directory listings
+ #dir-listing.activate       = "enable"
+@@ -267,6 +286,15 @@
  #$HTTP["host"] =~ "^www\.(.*)" {
  #  url.redirect            = ( "^/(.*)" => "http://%1/$1" )
  #}
@@ -55,7 +63,7 @@
  
  #
  # define a pattern for the host url finding
-@@ -333,4 +360,4 @@
+@@ -333,4 +361,4 @@
  server.max-worker = 4
  
  # Set the directory used for file uploads to /tmp
