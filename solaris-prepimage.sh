@@ -16,12 +16,14 @@ if [[ ! -f $EC2_HOME/bin/ec2-bundle-image ]]; then
   exit 1
 fi
 
-# stick to 101 due to a conflict with the latest, fix when fixed in the repo
+# install packages needed later
 pkg install sunstudioexpress SUNWlighttpd14 SUNWlibevent
 
 # get the memcached upstream source for now, replace with pkg later
 cd /tmp/src
-wget http://memcached.googlecode.com/files/memcached-1.4.0.tar.gz
+if [[ ! -f memcached-1.4.0.tar.gz ]]
+  wget http://memcached.googlecode.com/files/memcached-1.4.0.tar.gz
+fi
 tar -zxf memcached-1.4.0.tar.gz
 cd memcached-1.4.0
 configopts="--enable-dtrace"
@@ -37,7 +39,7 @@ if [[ ! -f Makefile ]]; then
 ./configure $configopts
 fi
 
-if [[ ! -f memcached ]]; then
+if [[ ! -f /usr/local/bin/memcached ]]; then
 dmake install
 fi
 
@@ -47,7 +49,9 @@ PATH=/opt/SunStudioExpress/bin:$PATH
 cd /tmp
 pkg install SUNWPython25
 #get easy install
-wget http://pypi.python.org/packages/2.5/s/setuptools/setuptools-0.6c9-py2.5.egg#md5=fe67c3e5a17b12c0e7c541b7ea43a8e6
+if [[ ! -f setuptools-0.6c9-py2.5.egg ]]
+  wget http://pypi.python.org/packages/2.5/s/setuptools/setuptools-0.6c9-py2.5.egg#md5=fe67c3e5a17b12c0e7c541b7ea43a8e6
+fi
 sh setuptools-0.6c9-py2.5.egg
 easy_install Twisted
 easy_install simplejson
@@ -139,6 +143,3 @@ else
     --user $EC2_ACCT_NUM --arch i386 \
     -i $DIRECTORY/$IMAGE -d $DIRECTORY/parts
 fi
-
-
-echo !!!!verify /etc/system !!!!
