@@ -46,7 +46,7 @@ fi
 
 # get the python stuff
 PATH=/opt/SunStudioExpress/bin:$PATH
-cd /tmp
+cd /tmp/src
 pkg install SUNWPython25
 #get easy install
 if [[ ! -f setuptools-0.6c9-py2.5.egg ]]; then
