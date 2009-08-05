@@ -110,7 +110,7 @@ fi
 
 
 # do the rebundling itself
-rm -rf /root/.ssh
+mv /root/.ssh /tmp/old-root-ssh
 rm -f /var/adm/messages.[01234]
 > /var/adm/messages
 > /var/adm/utmpx
