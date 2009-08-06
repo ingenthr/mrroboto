@@ -131,14 +131,14 @@ mkdir -p $DIRECTORY/keys
 
 if [[ `isalist | cut -f 1 -d " "` == "amd64" ]]; then
   ec2-bundle-image -c $EC2_CERT -k $EC2_PRIVATE_KEY   \
-    --kernel aki-fb3ddc92 --ramdisk ari-fd3ddc94 \
+    --kernel $EC2_KERNEL_64 --ramdisk $EC2_RAMDISK_64 \
     --block-device-mapping "root=rpool/56@0,ami=0,ephemeral0=1,ephemeral1=2,ephemeral2=3,ephemeral3=4" \
     --user $EC2_ACCT_NUM --arch x86_64 \
     -i $DIRECTORY/$IMAGE -d $DIRECTORY/parts 
 else
   cd $DIRECTORY
   ec2-bundle-image -c $EC2_CERT -k $EC2_PRIVATE_KEY   \
-    --kernel aki-1783627e --ramdisk ari-858362ec \
+    --kernel $EC2_KERNEL_32 --ramdisk $EC2_RAMDISK_32 \
     --block-device-mapping "root=rpool/56@0,ami=0,ephemeral0=1" \
     --user $EC2_ACCT_NUM --arch i386 \
     -i $DIRECTORY/$IMAGE -d $DIRECTORY/parts
