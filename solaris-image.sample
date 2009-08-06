@@ -2,7 +2,7 @@
 # This is a sample environmental file showing what needs to be set to 
 # do the rebundling
 #
-JAVA_HOME=/usr/jdk/latest
+export JAVA_HOME=/usr/jdk/latest
 export EC2_HOME=/opt/ec2
 BUCKET=northscale
 PATH=$PATH:$EC2_HOME/bin 
