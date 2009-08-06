@@ -5,8 +5,9 @@ if [[ $1 == "" ]] then;
   exit 1
 fi
 
-echo $PWD
-. $PWD/deps.env
+# source needed envrionmentals
+SCRIPTDIR=$(cd $(dirname "$0"); pwd)
+. $SCRIPTDIR/deps.env
 
 ssh -i $YSSHCERT root@$1 mkdir -p /mnt/keys
 scp -i $YSSHCERT \

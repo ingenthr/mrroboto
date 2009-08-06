@@ -3,7 +3,7 @@
 # do the rebundling
 #
 JAVA_HOME=/usr/jdk/latest
-EC2_HOME=/opt/ec2
+export EC2_HOME=/opt/ec2
 BUCKET=northscale
 PATH=$PATH:$EC2_HOME/bin 
 RUBYLIB=$EC2_HOME/lib 

@@ -11,7 +11,7 @@ if [[ ! -f $EC2_PRIVATE_KEY || ! -f $EC2_CERT ]]; then
   exit 1
 fi
 
-if [[ ! -f $EC2_HOME/bin/ec2-bundle-image ]]
+if [[ ! -f $EC2_HOME/bin/ec2-bundle-image ]]; then
   echo EC2_HOME is not set or is set incorrectly
   exit 1
 fi
