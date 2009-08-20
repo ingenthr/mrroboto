@@ -1,0 +1,8 @@
+AC_INIT([memcached-isaexec], [1.0], [matt@northscale.com])
+
+AM_INIT_AUTOMAKE([1.10 foreign])
+
+AC_PROG_CC
+
+AC_CONFIG_FILES([Makefile])
+AC_OUTPUT
