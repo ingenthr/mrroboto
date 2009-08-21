@@ -16,4 +16,4 @@ if [[ ! -f $EC2_HOME/bin/ec2-bundle-image ]]; then
   exit 1
 fi
 
-ec2reg -C $EC2_CERT -K $EC2_PRIVATE_KEY $BUCKET/$IMAGE.manifest.xml 
+ec2reg -U $EC2_URL -C $EC2_CERT -K $EC2_PRIVATE_KEY $BUCKET/$IMAGE.manifest.xml 
