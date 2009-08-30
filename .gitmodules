@@ -1,3 +1,6 @@
 [submodule "imagebuild/tdf"]
 	path = imagebuild/tdf
 	url = git@github.com:northscale/tdf.git
+[submodule "imagebuild/memcached/memcached-server"]
+	path = imagebuild/memcached/memcached-server
+	url = git://github.com/dustin/memcached.git
