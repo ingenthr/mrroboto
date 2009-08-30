@@ -1,0 +1,9 @@
+/opt/northscale  <- Base
+/opt/northscale/memcached/1.4 <- memcached base, isaexec here
+/opt/northscale/memcached/1.4/i86 <- memcached 32-bit
+/opt/northscale/memcached/1.4/amd64 <- memcached 64-bit
+/opt/northscale/tdf
+/opt/northscale/lib <- services
+
+pfexec env PYTHONPATH=/opt/northscale/lib/python2.5/site-packages easy_install --prefix=/opt/northscale Twisted
+pfexec env PYTHONPATH=/opt/northscale/lib/python2.5/site-packages easy_install --prefix=/opt/northscale simplejson
