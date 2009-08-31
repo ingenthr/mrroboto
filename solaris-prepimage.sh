@@ -2,6 +2,14 @@
 
 set -xe
 
+INSTTYPE=$1
+
+if [[ $INSTTYPE == "" ||
+      ( $INSTTYPE != "ami" && $INSTTYPE != "native" ) ]]; then
+  echo "usage: solaris-prepimage.sh <type>"
+  echo "Type 'ami' or 'native' is required."
+fi
+
 # source needed envrionmentals
 SCRIPTDIR=$(cd $(dirname "$0"); pwd)
 . $SCRIPTDIR/solaris-image.env
