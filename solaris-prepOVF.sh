@@ -55,7 +55,7 @@ pkg install SUNWckr SUNWcar SUNWcakr SUNWkvm SUNWos86r SUNWrmodr SUNWpsdcr \
   SUNWperl584core SUNWgrub SUNWxcu6 SUNWxcu4 SUNWgawk SUNWgtar \
   SUNWgnu-coreutils SUNWscp SUNWfmd SUNWxge SUNWbge SUNWnge SUNWrge \
   SUNWrtls SUNWixgb SUNWchxge SUNWzfs-auto-snapshot SUNWsolnm SUNWahci \
-  SUNWpython25 SUNWlighttpd SUNWlibevent
+  SUNWpython25 SUNWlighttpd SUNWlibevent SUNWnetcat
 
 # seed the initial smf repository
 cp $PKG_IMAGE/lib/svc/seed/global.db $PKG_IMAGE/etc/svc/repository.db
