@@ -69,13 +69,13 @@
    <exec_method
       type='method'
       name='start'
-      exec='/usr/local/bin/memcached-svc start'
+      exec='/opt/northscale/bin/memcached-svc start'
       timeout_seconds='60' />
 
    <exec_method
       type='method'
       name='stop'
-      exec='/usr/local/bin/memcached-svc stop %{restarter/contract}'
+      exec='/opt/northscale/bin/memcached-svc stop %{restarter/contract}'
       timeout_seconds='60' />
 
 </instance>
@@ -87,7 +87,7 @@
          <loctext xml:lang='C'>memcached 1.4.0 </loctext>
       </common_name>
       <documentation>
-         <manpage title='memcached' section='1m' manpath='/usr/local/share/man' />
+         <manpage title='memcached' section='1m' manpath='/opt/northscale/share/man' />
       </documentation>
     </template>
 

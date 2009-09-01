@@ -37,7 +37,7 @@ val=`svcprop -p "$1" memcached`
 [ -n "$val" ] && echo "$val"
 }
 
-MCBIN="/usr/local/bin"
+MCBIN="/opt/northscale/bin"
 MCOPTIONS="`getproparg memcached/options`"
 MEMBASE=`prtconf | grep Mem | cut -f 3 -d " "`
 MEMUSE=`expr $MEMBASE - 1024`

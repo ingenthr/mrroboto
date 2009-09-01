@@ -41,9 +41,9 @@
        </dependency>
 
 	<instance name="default" enabled="true">
-		<exec_method type="method" name="start" exec="/usr/local/tdf/gen-htdigest.sh" timeout_seconds="60"/>
+		<exec_method type="method" name="start" exec="/opt/northscale/tdf/gen-htdigest.sh" timeout_seconds="60"/>
 
-		<exec_method type="method" name="refresh" exec="/usr/local/tdf/gen-htdigest.sh" timeout_seconds="60"/>
+		<exec_method type="method" name="refresh" exec="/opt/northscale/tdf/gen-htdigest.sh" timeout_seconds="60"/>
 
 		<exec_method type="method" name="stop" exec=":true" timeout_seconds="60"/>
 

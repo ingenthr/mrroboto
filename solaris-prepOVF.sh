@@ -1,11 +1,17 @@
 #!/bin/bash
 # Version 2009.6.2.00 Updated by Jignesh Shah added  SUNWahci tested for OpenSolaris 2009.06 with VirtualBox 2.2.4
 # Version 2008.12.16.20  by Jignesh Shah based on Alex Eremin's blog entry and some more cutomization
+# Significant updates by Matt Ingenthron for NorthScale
+# Portions Copyright 2009 NorthScale
 TIMEZONE="TZ=UTC"
 HOSTNAME=memcached-appliance
 
 INSTALLDISK=c8t0d0
 PKG_IMAGE=/a; export PKG_IMAGE
+
+# this install method is a hack for now, reuse variable later
+IPKG_HOST=10.0.2.15
+HUSERNAME=ingenthr
 
 set -x
 
@@ -176,4 +182,9 @@ echo pool_rpool > /rpool/etc/bootsign
 zfs set mountpoint=/ rpool/ROOT/VOSApp
 zfs set compression=off rpool 
 #reboot
+
+# load up the pkgs, set up services
+scp -r $HUSERNAME@$IPKG_HOST:/opt/northscale $PKG_IMAGE/opt
+cp $PKG_IMAGE/opt/northscale/var/svc/manifest/* \
+  $PKG_IMAGE/opt/northscale/tdf/tdf-manifest.xml $PKG_IMAGE/var/svc/manifest
 
