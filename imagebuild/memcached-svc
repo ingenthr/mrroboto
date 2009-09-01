@@ -40,7 +40,7 @@ val=`svcprop -p "$1" memcached`
 MCBIN="/opt/northscale/bin"
 MCOPTIONS="`getproparg memcached/options`"
 MEMBASE=`prtconf | grep Mem | cut -f 3 -d " "`
-MEMUSE=`expr $MEMBASE - 1024`
+MEMUSE=`expr $MEMBASE - 512`
 MCOPTIONS="$MCOPTIONS -m $MEMUSE"
 
 case "$1" in

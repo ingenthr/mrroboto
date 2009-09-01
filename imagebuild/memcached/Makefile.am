@@ -32,11 +32,16 @@ CONFIGURE_OPTIONS64 += --with-libevent=/usr/lib/amd64
 bin_PROGRAMS = memcached
 memcached_SOURCES = memcached.c
 
-fetch-memcached:
-	tar -zxf $VER.tar.gz
-	cd $VER
+all-local: build32 build64
 
-build-memcached-32: fetch-memcached
+clean-local: cleanmemcbuild
+
+install-exec-local: inst32memc inst64memc
+
+install-data-local: instmemc
+
+cleanmemcbuild:
+	rm -rf $(VER) $(VER64)
 
 $(VER)/config.status: $(VER)/configure
 	(cd $(VER); env \
@@ -76,3 +81,21 @@ build64: $(VER64)/config.status
 	PATH=$(BUILD_PATH) \
 	MAKE=$(CCSMAKE) \
 	$(CCSMAKE))
+
+inst32memc: build32
+        (cd $(VER32); env \
+        PATH=$(BUILD_PATH) \
+        MAKE=$(CCSMAKE) \
+        $(CCSMAKE) install-exec)
+
+inst64memc: build64
+	(cd $(VER64); env \
+	PATH=$(BUILD_PATH) \
+	MAKE=$(CCSMAKE) \
+	$(CCSMAKE) install-exec)
+
+instmemc: build32
+	(cd $(VER); env \
+        PATH=$(BUILD_PATH) \
+        MAKE=$(CCSMAKE) \
+        $(CCSMAKE) install-data)
