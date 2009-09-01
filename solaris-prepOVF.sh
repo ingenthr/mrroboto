@@ -187,4 +187,22 @@ zfs set compression=off rpool
 scp -r $HUSERNAME@$IPKG_HOST:/opt/northscale $PKG_IMAGE/opt
 cp $PKG_IMAGE/opt/northscale/var/svc/manifest/* \
   $PKG_IMAGE/opt/northscale/tdf/tdf-manifest.xml $PKG_IMAGE/var/svc/manifest
+scp -r $HUSERNAME@$IPKG_HOST:~ingenthr/src/mrroboto/imagebuild/lighttpd.conf.patch /tmp
 
+# cap ZFS memory usage
+# this may not work on EC2 :(
+cp /etc/system /etc/system.bak
+cat << STOP >> /etc/system
+*
+* lower the memory consumed by ZFS, since we won't be doing much FS stuff
+* here
+*
+* http://www.solarisinternals.com/wiki/index.php/ZFS_Evil_Tuning_Guide#Limiting_the_ARC_Cache
+*
+set zfs:zfs_arc_max = 1073741824
+
+STOP
+
+# set up lighttpd
+cp $PKG_IMAGE/etc/lighttpd/1.4/lighttpd.conf $PKG_IMAGE/etc/lighttpd/1.4/lighttpd.conf.orig
+patch $PKG_IMAGE/etc/lighttpd/1.4/lighttpd.conf /tmp/lighttpd.conf.patch
