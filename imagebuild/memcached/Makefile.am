@@ -9,7 +9,7 @@ CCSMAKE = /usr/bin/gmake
 CC = /opt/SunStudioExpress/bin/cc
 CC64 = /opt/SunStudioExpress/bin/cc
 
-NSCALEPREFIX = /opt/northscale
+LINSTPREFIX = ${INSTLOC}
 
 CFLAGS += -mt -xO5 -xtarget=generic -xstrconst
 CFLAGS64 = -mt -xO5 -xtarget=generic -xstrconst -m64
@@ -17,15 +17,15 @@ CFLAGS64 = -mt -xO5 -xtarget=generic -xstrconst -m64
 LIBS = -lumem
 
 CONFIGURE_OPTIONS = --enable-dtrace
-CONFIGURE_OPTIONS += --prefix=$(NSCALEPREFIX)
+CONFIGURE_OPTIONS += --prefix=$(LINSTPREFIX)
 CONFIGURE_OPTIONS += --localstatedir=/var
 
 CONFIGURE_OPTIONS32 = $(CONFIGURE_OPTIONS)
-CONFIGURE_OPTIONS32 += --bindir=$(NSCALEPREFIX)/bin/i86
+CONFIGURE_OPTIONS32 += --bindir=$(LINSTPREFIX)/bin/i86
 CONFIGURE_OPTIONS32 += --with-libevent=/usr
 
 CONFIGURE_OPTIONS64 = $(CONFIGURE_OPTIONS)
-CONFIGURE_OPTIONS64 += --bindir=$(NSCALEPREFIX)/bin/amd64
+CONFIGURE_OPTIONS64 += --bindir=$(LINSTPREFIX)/bin/amd64
 CONFIGURE_OPTIONS64 += --with-libevent=/usr/lib/amd64
 
 # not the real memcached, just the isaexec
@@ -70,23 +70,23 @@ $(VER64)/configure: $(VER).tar.gz
 
 build32: $(VER)/config.status
 	(cd $(VER); env \
-	"CFLAGS=$(CFLAGS)" "LDFLAGS=-mt -L$(NSCALEPREFIX)/lib -lnsl" \
+	"CFLAGS=$(CFLAGS)" "LDFLAGS=-mt -L$(LINSTPREFIX)/lib -lnsl" \
 	PATH=$(BUILD_PATH) \
 	MAKE=$(CCSMAKE) \
 	$(CCSMAKE))
 
 build64: $(VER64)/config.status
 	(cd $(VER64); env \
-	"CFLAGS=$(CFLAGS64)" "LDFLAGS=-mt -L$(NSCALEPREFIX)/lib/amd64 -lnsl" \
+	"CFLAGS=$(CFLAGS64)" "LDFLAGS=-mt -L$(LINSTPREFIX)/lib/amd64 -lnsl" \
 	PATH=$(BUILD_PATH) \
 	MAKE=$(CCSMAKE) \
 	$(CCSMAKE))
 
 inst32memc: build32
-        (cd $(VER32); env \
-        PATH=$(BUILD_PATH) \
-        MAKE=$(CCSMAKE) \
-        $(CCSMAKE) install-exec)
+	(cd $(VER); env \
+	PATH=$(BUILD_PATH) \
+	MAKE=$(CCSMAKE) \
+	$(CCSMAKE) install-exec)
 
 inst64memc: build64
 	(cd $(VER64); env \

@@ -1,2 +1,5 @@
 deps.env
 solaris-image.env
+imagebuild/memcached/memcached-1.4.1-64/*
+imagebuild/memcached/memcached-1.4.1/*
+imagebuild/tmp

@@ -6,8 +6,9 @@
 
 set -xe
 
-. pkg.env
-
+# source needed environmentals
+SCRIPTDIR=$(cd $(dirname "$0"); pwd)
+. $SCRIPTDIR/pkg.env
 
 eval `${pkgsendcmd} open ec2lighttpdauth@1.0-1`
 ${pkgsendcmd} add dir mode=0555 owner=root group=bin path=/opt/northscale
