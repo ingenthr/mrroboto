@@ -1,0 +1,38 @@
+Copyright (c) 2009, NorthScale
+Portions copyright Sun Microsystems.
+
+The contents of this image are subject to multiple licenses. All of
+these licenses permit use, copying and redistribution of the software.
+
+
+NorthScale memcached tools
+==========================
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+OpenSolaris base image
+======================
+The contents of the OpenSolaris™ Image are governed by the Common
+Development and Distribution License Version 1.0, with the exception of
+certain portions under other licenses (such as the OpenSolaris Binary
+License) as provided in the OpenSolaris Live Media License file included
+with the software. The additional software available from the  OpenSolaris
+Package Repository and not included on the Live Media Image is governed by
+the licenses provided in the  OpenSolaris Package Repository License file
+and/or in the individual software packages.  All of these licenses permit
+use, copying and redistribution of the software.

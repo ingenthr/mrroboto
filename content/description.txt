@@ -1,0 +1,18 @@
+This Virtual Appliance has been packaged by NorthScale with a tested
+release of memcached built directy from the source distribution from the
+Open Source memcached community.
+
+It is available free of charge and supports the latest features and fixes
+as covered in the release notes:
+<http://code.google.com/p/memcached/wiki/ReleaseNotes141>
+
+It is backward compatible with previous releases and previous clients.
+Updated clietns are recommended and may be required to take advantage of
+the latest functionality.  By default, this image will run a single
+memcached instance using nearly all of the memory on the system.
+
+For more information on memcahced in general, look to the official site
+<http://memcached.org/> or the wiki and faq.
+
+For more information on this image or to track updates, please look to
+<http://labs.northscale.com/memcached-virtual-appliance/>

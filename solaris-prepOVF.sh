@@ -140,7 +140,7 @@ Open Source memcached community.
 
 It is available free of charge and supports the latest features and fixes
 as covered in the release notes:
-<http://code.google.com/p/memcached/wiki/ReleaseNotes140>
+<http://code.google.com/p/memcached/wiki/ReleaseNotes141>
 
 It is backward compatible with previous releases and previous clients.
 Updated clietns are recommended and may be required to take advantage of
@@ -151,7 +151,7 @@ For more information on memcahced in general, look to the official site
 <http://memcached.org/> or the wiki and faq.
 
 For more information on this image or to track updates, please look to
-<http://labs.northscale.com/memcached-ami/>
+<http://labs.northscale.com/memcached-virtual-appliance/>
 
 EOF
 
